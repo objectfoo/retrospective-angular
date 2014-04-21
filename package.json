@@ -4,7 +4,8 @@
   "description": "",
   "main": "serve.js",
   "scripts": {
-    "serve": "nodemon serve.js"
+    "serve": "nodemon serve.js",
+    "build": "node_modules/requirejs/bin/r.js -o app.build.js"
   },
   "repository": {
     "type": "git",
