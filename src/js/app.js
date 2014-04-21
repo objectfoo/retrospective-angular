@@ -3,9 +3,9 @@ define(['angular'], function (angular) {
 
 	return angular.module('retrospective', [])
 
-		.value('topicIDs', [])
+		.value('topicKeys', [])
 
-		.controller('MainCtrl', function MainCtrl($scope, $rootScope, topicStorage, topicIDs) {
+		.controller('MainCtrl', function MainCtrl($scope, $rootScope, topicStorage, topicKeys) {
 		$scope.today = new Date();
 	});
 });

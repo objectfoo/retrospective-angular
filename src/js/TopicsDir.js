@@ -9,15 +9,20 @@ define(['app'], function (app) {
 			require: '^TopicsCtrl',
 			scope: '=',
 			templateUrl: 'topics.html',
+
 			controller: function($scope, $attrs) {
-				$scope.addTopic = addTopic;
 				$scope.model.placeholder = $attrs.retTopics;
 
-				function addTopic(newTopic) {
-					if (newTopic.length > 0) {
+				$scope.remove = function (idx) {
+					$scope.model.topics.splice(idx, 1);
+				};
+
+				$scope.add = function (newTopic) {
+					if (newTopic && newTopic.length) {
 						$scope.model.topics.push({ name: newTopic });
+						$scope.model.newTopic = '';
 					}
-				}
+				};
 			}
 		};
 	}]);

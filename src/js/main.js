@@ -1,4 +1,3 @@
-/*global require*/
 require.config({
 	paths: {
 		angular: '../vendor/angular/angular'
@@ -10,7 +9,7 @@ require.config({
 	}
 });
 
-require(['angular', 'app', 'TopicsCtrl', 'TopicsDir', 'AddVotingDir', 'topicStorage'], function (angular) {
+require(['angular', 'app', 'TopicsCtrl', 'TopicsDir', 'AddVotingDir', 'topicStorage', 'forceNumericDir'], function (angular) {
 	'use strict';
 	angular.bootstrap(document, ['retrospective']);
 });

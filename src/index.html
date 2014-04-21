@@ -21,15 +21,16 @@
 	<section
 		id="ret-bad"
 		ng-controller="TopicsCtrl"
-		ret-topics="What needs improvement?"
-		ret-add-voting></section>
+		ret-add-voting
+		ret-topics="What needs improvement?"></section>
 
 	<section
 		id="ret-next"
 		ng-controller="TopicsCtrl"
 		ret-topics="What should we try next time?"></section>
 
-
+		<button ng-click="$emit('sort')">Sort</button>
+		<button ng-click="$emit('printable')">Printable</button>
 	<footer>
 		foot
 	</footer>
@@ -37,11 +38,23 @@
 	<script data-main="js/main" src="node_modules/requirejs/require.js"></script>
 
 <script type="text/ng-template" id="topics.html">
-	<input type="text" ng-model="newTopic" ng-blur="addTopic(newTopic)" placeholder="{{model.placeholder}}">
-
-	<ul>
-		<li ng-repeat="topic in model.topics track by $index">{{topic.name}}
-	</ul>
+	<input type="text" ng-model="model.newTopic" ng-blur="add(model.newTopic)" placeholder="{{model.placeholder}}">
+	<ul ng-include="'topic.html'"></ul>
 </script>
+
+<script type="text/ng-template" id="topic.html">
+	<li ng-repeat="topic in model.topics track by $index">
+		<div ng-if="model.isVotingEnabled">
+			<input type="text" ng-model="topic.votes" force-numeric>
+			<button ng-click="increment(topic)">&plus;</button>
+		</div>
+		<div>
+			{{topic.name}}
+			<button ng-click="remove($index)">&times;</button>
+		</div>
+		<input type="text" ng-model="topic.name">
+	</li>
+</script>
+
 </body>
 </html>

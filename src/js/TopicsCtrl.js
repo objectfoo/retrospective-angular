@@ -1,11 +1,12 @@
 define(['app', 'topicStorage'], function (app) {
 	'use strict';
 
-	return app.controller('TopicsCtrl', function ($scope, $attrs, topicStorage, topicIDs) {
+	return app.controller('TopicsCtrl', function ($scope, $attrs, topicStorage, topicKeys) {
 		var topicID = $attrs.id;
 
-		if (!~topicIDs.indexOf(topicID)) {
-			topicIDs.push(topicID)
+		// save a list of topic keys for printing
+		if (!~topicKeys.indexOf(topicID)) {
+			topicKeys.push(topicID);
 		}
 
 		$scope.model = {
@@ -13,7 +14,7 @@ define(['app', 'topicStorage'], function (app) {
 			topics: topicStorage.get(topicID)
 		};
 
-		$scope.$watchCollection('model.topics', updateStore);
+		$scope.$watch('model.topics', updateStore, true);
 		$scope.$on('topics.clear', clearTopics);
 
 		function updateStore() {
