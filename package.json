@@ -1,0 +1,24 @@
+{
+  "name": "retrospective-angular",
+  "version": "0.0.0",
+  "description": "",
+  "main": "serve.js",
+  "scripts": {
+    "serve": "nodemon serve.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/objectfoo/retrospective-angular.git"
+  },
+  "author": "satake",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/objectfoo/retrospective-angular/issues"
+  },
+  "homepage": "https://github.com/objectfoo/retrospective-angular",
+  "devDependencies": {
+    "express": "^4.0.0",
+    "compression": "^1.0.1",
+    "requirejs": "^2.1.11"
+  }
+}

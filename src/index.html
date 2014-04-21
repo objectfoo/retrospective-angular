@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Retrospective-angular</title>
+	<link rel="stylesheet" href="css/normalize.css">
+</head>
+<body ng-controller="MainCtrl">
+	<header>
+		<div class="today">{{today | date:'shortDate'}}</div>
+		<h1>Retrospective <small>angular</small></h1>
+		<button ng-click="$broadcast('topics.clear')">Clear All</button>
+	</header>
+
+
+	<section 
+		id="ret-good"
+		ng-controller="TopicsCtrl"
+		ret-topics="What went well?"></section>
+
+	<section
+		id="ret-bad"
+		ng-controller="TopicsCtrl"
+		ret-topics="What needs improvement?"
+		ret-add-voting></section>
+
+	<section
+		id="ret-next"
+		ng-controller="TopicsCtrl"
+		ret-topics="What should we try next time?"></section>
+
+
+	<footer>
+		foot
+	</footer>
+
+	<script data-main="js/main" src="node_modules/requirejs/require.js"></script>
+
+<script type="text/ng-template" id="topics.html">
+	<input type="text" ng-model="newTopic" ng-blur="addTopic(newTopic)" placeholder="{{model.placeholder}}">
+
+	<ul>
+		<li ng-repeat="topic in model.topics track by $index">{{topic.name}}
+	</ul>
+</script>
+</body>
+</html>
