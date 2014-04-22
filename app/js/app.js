@@ -1,4 +1,4 @@
-angular.module('retrospective', ['retrospective.topics', 'forceNumeric'])
+angular.module('retrospective', ['retrospective.topics', 'forceNumeric', 'escInInput'])
 
 .value('topicKeys', [])
 .value('version', 5.0)

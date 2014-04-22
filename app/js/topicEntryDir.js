@@ -10,17 +10,39 @@ angular.module('retrospective.topics')
 
 		controller: function($scope, $attrs) {
 			$scope.model.placeholder = $attrs.retTopics;
+			$scope.editedTopic = null;
+			$scope.originalTopic = null;
 
-			$scope.remove = function (idx) {
-				$scope.model.topics.splice(idx, 1);
-			};
+			angular.extend($scope, {
+				remove: function (idx) {
+					$scope.model.topics.splice(idx, 1);
+				},
 
-			$scope.add = function (newTopic) {
-				if (newTopic && newTopic.length) {
-					$scope.model.topics.unshift({ name: newTopic });
-					$scope.model.newTopic = '';
+				add: function (newTopic) {
+					if (newTopic && newTopic.length) {
+						$scope.model.topics.unshift({ name: newTopic });
+						$scope.model.newTopic = '';
+					}
+				},
+
+				editTopic: function (topic) {
+					$scope.editedTopic = topic;
+					$scope.originalTopic = angular.extend({}, topic);
+				},
+
+				doneEditing: function (topic) {
+					$scope.editedTopic = null;
+					if (!topic.name) {
+						// remove
+					}
+				},
+
+				revertEditing: function (topic) {
+					$scope.model.topics[$scope.model.topics.indexOf(topic)] = $scope.originalTopic;
+					$scope.doneEditing($scope.originalTopic);
 				}
-			};
+			});
+
 		}
 	};
 }]);

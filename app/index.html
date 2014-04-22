@@ -46,6 +46,7 @@
 	<script src="js/topicVotingDir.js"></script>
 
 	<script src="js/forceNumericDir.js"></script>
+	<script src="js/escInInputDir.js"></script>
 
 
 <script type="text/ng-template" id="topics.html">
@@ -59,18 +60,18 @@
 <script type="text/ng-template" id="topic.html">
 	<li ng-repeat="topic in model.topics track by $index">
 
-		<div ng-class="{'hidden': topic.$isEditing}">
+		<div ng-class="{'hidden': topic == editedTopic }">
 			<div ng-if="model.isVotingEnabled">
 				<input type="text" ng-model="topic.votes" force-numeric>
 				<button ng-click="increment(topic)">&plus;</button>
 			</div>
 			<div>
-				<div ng-dblclick="topic.$isEditing=true">{{topic.name}}</div>
+				<div ng-dblclick="editTopic(topic)">{{topic.name}}</div>
 				<button ng-click="remove($index)">&times;</button>
 			</div>
 		</div>
-		<form ng-submit="topic.$isEditing=false">
-			<input type="text" ng-class="{'hidden': !topic.$isEditing}" ng-model="topic.name">
+		<form ng-submit="doneEditing(topic)">
+			<input type="text" ng-class="{'hidden': topic != editedTopic}" ng-model="editedTopic.name" esc-in-input="revertEditing(topic)">
 		</form>
 	</li>
 </script>
