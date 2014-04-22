@@ -21,7 +21,7 @@ angular.module('retrospective.topics')
 
 			$scope.add = function(newTopic) {
 				if (newTopic && newTopic.length) {
-					$scope.model.topics.push({ name: newTopic, votes: 0 });
+					$scope.model.topics.unshift({ name: newTopic, votes: 0 });
 					$scope.model.newTopic = '';
 				}
 			};

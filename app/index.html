@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Retrospective-angular</title>
 	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
 <body ng-controller="MainCtrl">
 	<header>
@@ -36,7 +37,7 @@
 	</footer>
 
 	<script src="vendor/angular/angular.js"></script>
-
+	
 	<script src="js/app.js"></script>
 	<script src="js/retrospectiveStore.js"></script>
 
@@ -54,17 +55,23 @@
 	<ul ng-include="'topic.html'"></ul>
 </script>
 
+
 <script type="text/ng-template" id="topic.html">
 	<li ng-repeat="topic in model.topics track by $index">
-		<div ng-if="model.isVotingEnabled">
-			<input type="text" ng-model="topic.votes" force-numeric>
-			<button ng-click="increment(topic)">&plus;</button>
+
+		<div ng-class="{'hidden': topic.$isEditing}">
+			<div ng-if="model.isVotingEnabled">
+				<input type="text" ng-model="topic.votes" force-numeric>
+				<button ng-click="increment(topic)">&plus;</button>
+			</div>
+			<div>
+				<div ng-dblclick="topic.$isEditing=true">{{topic.name}}</div>
+				<button ng-click="remove($index)">&times;</button>
+			</div>
 		</div>
-		<div>
-			{{topic.name}}
-			<button ng-click="remove($index)">&times;</button>
-		</div>
-		<input type="text" ng-model="topic.name">
+		<form ng-submit="topic.$isEditing=false">
+			<input type="text" ng-class="{'hidden': !topic.$isEditing}" ng-model="topic.name">
+		</form>
 	</li>
 </script>
 
