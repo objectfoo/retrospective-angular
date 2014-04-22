@@ -1,6 +1,5 @@
 angular.module('escInInput', [])
 .directive('escInInput', [function(){
-	'use strict';
 	var ESC_KEY = 27;
 
 	return function (scope, elem, attrs) {

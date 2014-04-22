@@ -5,5 +5,5 @@ angular.module('retrospective', ['retrospective.topics', 'forceNumeric', 'escInI
 
 .controller('MainCtrl', ['$scope', 'version', function MainCtrl($scope, version) {
 	$scope.today = new Date();
-	$scope.version = version
+	$scope.version = version;
 }]);

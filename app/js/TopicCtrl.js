@@ -22,4 +22,4 @@ angular.module('retrospective.topics', ['retrospective.store'])
 	function clearTopics() {
 		$scope.model.topics.length = 0;
 	}
-}])
+}]);
