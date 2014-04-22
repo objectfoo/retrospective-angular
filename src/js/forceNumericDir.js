@@ -1,26 +1,23 @@
-define(['app'], function (app) {
+retrospective.directive('forceNumeric', [function(){
 	'use strict';
 
-	app.directive('forceNumeric', function(){
+	return {
+		require: 'ngModel',
+		restrict: 'A',
 
-		return {
-			require: 'ngModel',
-			restrict: 'A',
+		link: function($scope, element, attrs, ngModelCtrl) {
+			ngModelCtrl.$parsers.push(voteParser);
 
-			link: function($scope, element, attrs, ngModelCtrl) {
-				ngModelCtrl.$parsers.push(voteParser);
+			function voteParser(text) {
+				var transformed = text.replace(/[^0-9]/g, '');
 
-				function voteParser(text) {
-					var transformed = text.replace(/[^0-9]/g, '');
-
-					if (transformed !== text) {
-						ngModelCtrl.$setViewValue(transformed);
-						ngModelCtrl.$render();						
-					}
-
-					return transformed;
+				if (transformed !== text) {
+					ngModelCtrl.$setViewValue(transformed);
+					ngModelCtrl.$render();						
 				}
+
+				return transformed;
 			}
-		};
-	});
-});
+		}
+	};
+}]);
