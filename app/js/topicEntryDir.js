@@ -1,5 +1,5 @@
-retrospective.directive('retTopics', [function () {
-	'use strict';
+angular.module('retrospective.topics')
+.directive('retTopicEntry', [function () {
 
 	return {
 		priority: 200, // after ret-add-voting directive

@@ -1,5 +1,5 @@
-retrospective.factory('topicStorage', ['$window', function ($window) {
-	'use strict';
+angular.module('retrospective.store', [])
+.factory('topicStorage', ['$window', function ($window) {
 
 	return {
 		get: function (id) {

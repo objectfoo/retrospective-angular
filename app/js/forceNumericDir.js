@@ -1,5 +1,5 @@
-retrospective.directive('forceNumeric', [function(){
-	'use strict';
+angular.module('forceNumeric', [])
+.directive('forceNumeric', [function(){
 
 	return {
 		require: 'ngModel',

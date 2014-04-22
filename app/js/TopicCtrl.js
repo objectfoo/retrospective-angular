@@ -1,8 +1,5 @@
-retrospective.controller('TopicsCtrl',
-	['$scope', '$attrs', 'topicStorage', 'topicKeys',
-
-function ($scope, $attrs, topicStorage, topicKeys) {
-	'use strict';
+angular.module('retrospective.topics', ['retrospective.store'])
+.controller('TopicCtrl', ['$scope', '$attrs', 'topicStorage', 'topicKeys', function ($scope, $attrs, topicStorage, topicKeys) {
 	var topicID = $attrs.id;
 
 	// save a list of topic keys for printing
@@ -25,4 +22,4 @@ function ($scope, $attrs, topicStorage, topicKeys) {
 	function clearTopics() {
 		$scope.model.topics.length = 0;
 	}
-}]);
+}])

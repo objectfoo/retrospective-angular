@@ -15,33 +15,37 @@
 
 	<section 
 		id="ret-good"
-		ng-controller="TopicsCtrl"
-		ret-topics="What went well?"></section>
+		ng-controller="TopicCtrl"
+		ret-topic-entry="What went well?"></section>
 
 	<section
 		id="ret-bad"
-		ng-controller="TopicsCtrl"
-		ret-add-voting
-		ret-topics="What needs improvement?"></section>
+		ng-controller="TopicCtrl"
+		ret-voting
+		ret-topic-entry="What needs improvement?"></section>
 
 	<section
 		id="ret-next"
-		ng-controller="TopicsCtrl"
-		ret-topics="What should we try next time?"></section>
+		ng-controller="TopicCtrl"
+		ret-topic-entry="What should we try next time?"></section>
 
 		<button ng-click="$emit('sort')">Sort</button>
 		<button ng-click="$emit('printable')">Printable</button>
 	<footer>
-		foot
+		a Katabelisk production, Retrospective v{{version | number: 1}}
 	</footer>
 
 	<script src="vendor/angular/angular.js"></script>
+
 	<script src="js/app.js"></script>
-	<script src="js/addVotingDir.js"></script>
+	<script src="js/retrospectiveStore.js"></script>
+
+	<script src="js/TopicCtrl.js"></script>
+	<script src="js/topicEntryDir.js"></script>
+	<script src="js/topicVotingDir.js"></script>
+
 	<script src="js/forceNumericDir.js"></script>
-	<script src="js/TopicsCtrl.js"></script>
-	<script src="js/TopicsDir.js"></script>
-	<script src="js/topicStorage.js"></script>
+
 
 <script type="text/ng-template" id="topics.html">
 	<form ng-submit="add(model.newTopic)">
