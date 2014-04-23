@@ -9,7 +9,7 @@ angular.module('retrospective.topics')
 		templateUrl: 'topics.html',
 
 		controller: function($scope, $attrs) {
-			$scope.model.placeholder = $attrs.retTopics;
+			$scope.model.placeholder = $attrs.retTopicEntry;
 			$scope.editedTopic = null;
 			$scope.originalTopic = null;
 
@@ -26,6 +26,7 @@ angular.module('retrospective.topics')
 				},
 
 				editTopic: function (topic) {
+					console.log(this);
 					$scope.editedTopic = topic;
 					$scope.originalTopic = angular.extend({}, topic);
 				},

@@ -1,3 +1,134 @@
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .hidden {
+[ng-cloak],
+.ng-cloak,
+.hidden {
   display: none !important;
 }
+[ng-controller=MainCtrl] {
+  background-color: #eee;
+  margin: 0 auto;
+  max-width: 850px;
+  min-width: 600px;
+  overflow-y: scroll;
+  padding: 0 1em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+[ng-controller=TopicCtrl] {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+[ng-model='editedTopic.name'],
+[ng-model='model.newTopic'] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-width: 0 ;
+  color: #555;
+  display: block;
+  font-style: 14px;
+  height: 40px;
+  outline: 0;
+  padding: 6px 12px;
+  width: 100%;
+  box-shadow: none;
+}
+[ng-model='editedTopic.name']:focus,
+[ng-model='model.newTopic']:focus {
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.topic-name {
+  cursor: pointer;
+  overflow: hidden;
+  padding: 10px;
+}
+small,
+.small {
+  font-size: 85%;
+}
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+.page-header {
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+.page-header > h1 {
+  margin: 0;
+}
+.page-header small {
+  color: #999999;
+  font-size: 65%;
+}
+body > footer {
+  padding-top: 9px;
+  margin: 20px 0 40px;
+  border-top: 1px solid #eeeeee;
+}
+.media,
+.media__body {
+  overflow: hidden;
+}
+.media > .pull-left {
+  margin-right: 10px;
+}
+.media > .pull-right {
+  margin-left: 10px;
+}
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+  margin: 0;
+}
+.list-topics li {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-top: 1px solid #ddd;
+}
+.btn {
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  line-height: 1.428;
+  padding: 6px 12px;
+}
+.btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #ccc;
+  outline: 0;
+}
+.btn-default:hover {
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+.btn-default:active {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.close {
+  padding: 0;
+  background: 0 0;
+  border: 0;
+  -webkit-appearance: none;
+  font-size: 21px;
+  font-weight: 700;
+  color: #000;
+  opacity: .2;
+  text-shadow: 0 1px 0 #fff;
+  width: 38px;
+  height: 34px;
+  outline: none;
+}
+.close:hover {
+  opacity: .5;
+}
+/*
+ * mixins and vars
+ **********************************************************************/

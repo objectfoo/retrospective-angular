@@ -7,12 +7,11 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body ng-controller="MainCtrl">
-	<header>
-		<div class="today">{{today | date:'shortDate'}}</div>
-		<h1>Retrospective <small>angular</small></h1>
-		<button ng-click="$broadcast('topics.clear')">Clear All</button>
+	<header class="page-header media">
+		<div class="today pull-left">{{today | date:'shortDate'}}</div>
+		<div class="pull-right"><button class="btn btn-default" ng-click="$broadcast('topics.clear')">Clear All</button></div>
+		<h1 class="media__body">Retrospective <small>angular</small></h1>
 	</header>
-
 
 	<section 
 		id="ret-good"
@@ -30,8 +29,8 @@
 		ng-controller="TopicCtrl"
 		ret-topic-entry="What should we try next time?"></section>
 
-		<button ng-click="$emit('sort')">Sort</button>
-		<button ng-click="$emit('printable')">Printable</button>
+		<button class="btn btn-default" ng-click="$emit('sort')">Sort</button>
+		<button class="btn btn-default" ng-click="$emit('printable')">Printable</button>
 	<footer>
 		a Katabelisk production, Retrospective v{{version | number: 1}}
 	</footer>
@@ -53,7 +52,7 @@
 	<form ng-submit="add(model.newTopic)">
 	<input type="text" ng-model="model.newTopic" placeholder="{{model.placeholder}}">
 	</form>
-	<ul ng-include="'topic.html'"></ul>
+	<ul class="list-unstyled list-topics" ng-include="'topic.html'"></ul>
 </script>
 
 
@@ -63,11 +62,11 @@
 		<div ng-class="{'hidden': topic == editedTopic }">
 			<div ng-if="model.isVotingEnabled">
 				<input type="text" ng-model="topic.votes" force-numeric>
-				<button ng-click="increment(topic)">&plus;</button>
+				<button class="btn btn-default" ng-click="increment(topic)">&plus;</button>
 			</div>
 			<div>
-				<div ng-dblclick="editTopic(topic)">{{topic.name}}</div>
-				<button ng-click="remove($index)">&times;</button>
+				<button class="close pull-right" ng-click="remove($index)">&times;</button>
+				<div class="topic-name" ng-dblclick="editTopic(topic)">{{topic.name}}</div>
 			</div>
 		</div>
 		<form ng-submit="doneEditing(topic)">
