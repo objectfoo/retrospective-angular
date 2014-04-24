@@ -2,9 +2,9 @@
   display: none !important;
 }
 
-// .editing {
-// 	background-color: #F5F6CE;
-// }
+.topic-panel {
+	position: relative;
+}
 
 .brand {
 	color: @gray;
@@ -49,6 +49,39 @@
 	&:focus {
 		background-color: #F5F6CE;
 	}
+}
+
+.topic {
+	&:hover {
+		[ng-model='topic.votes'] {
+			visibility: hidden;
+		}
+
+		[ng-click*='increment'] {
+			display: block;
+		}
+	}
+
+
+
+
+}
+
+[ng-click*='increment'] {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	display: none;
+}
+
+[ng-model='topic.votes'] {
+	.borderBox();
+	font-size: 18px;
+	width: 35px;
+	margin: 5px;
+	text-align: center;
+	height: 35px;
+
 }
 
 .topic-name {
@@ -100,6 +133,10 @@ body > footer {
 }
 
 .list-topics {
+	padding-left: 0;
+	list-style: lower-alpha;
+	margin: 0;
+
 	li {
 		.borderBox();
 		overflow: hidden;
@@ -131,6 +168,11 @@ body > footer {
 	&:active {
 		box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
 	}
+}
+
+.btn-increment {
+	width: 35px;
+	height: 35px;
 }
 
 .close {
