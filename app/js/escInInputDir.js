@@ -1,4 +1,4 @@
-angular.module('escInInput', [])
+angular.module('retrospective')
 .directive('escInInput', [function(){
 	var ESC_KEY = 27;
 

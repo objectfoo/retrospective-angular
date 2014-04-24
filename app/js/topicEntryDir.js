@@ -1,5 +1,5 @@
-angular.module('retrospective.topics')
-.directive('retTopicEntry', [function () {
+angular.module('retrospective')
+.directive('retTopicEntry', [function ($log) {
 
 	return {
 		priority: 200, // after ret-add-voting directive
@@ -14,8 +14,8 @@ angular.module('retrospective.topics')
 			$scope.originalTopic = null;
 
 			angular.extend($scope, {
-				remove: function (idx) {
-					$scope.model.topics.splice(idx, 1);
+				remove: function (topic) {
+					$scope.model.topics.splice($scope.model.topics.indexOf(topic), 1);
 				},
 
 				add: function (newTopic) {
@@ -25,16 +25,17 @@ angular.module('retrospective.topics')
 					}
 				},
 
-				editTopic: function (topic) {
-					console.log(this);
+				editTopic: function (topic, el) {
 					$scope.editedTopic = topic;
 					$scope.originalTopic = angular.extend({}, topic);
 				},
 
 				doneEditing: function (topic) {
-					$scope.editedTopic = null;
-					if (!topic.name) {
-						// remove
+					if ($scope.editedTopic != null) {
+						$scope.editedTopic = null;
+						if (topic.name.length === 0) {
+							$scope.remove(topic);
+						}
 					}
 				},
 

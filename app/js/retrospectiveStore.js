@@ -1,4 +1,4 @@
-angular.module('retrospective.store', [])
+angular.module('retrospective')
 .factory('topicStorage', ['$window', function ($window) {
 
 	return {

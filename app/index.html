@@ -8,9 +8,9 @@
 </head>
 <body ng-controller="MainCtrl">
 	<header class="page-header media">
-		<div class="today pull-left">{{today | date:'shortDate'}}</div>
 		<div class="pull-right"><button class="btn btn-default" ng-click="$broadcast('topics.clear')">Clear All</button></div>
-		<h1 class="media__body">Retrospective <small>angular</small></h1>
+		<h1 class="brand">Retrospective <small>angular</small></h1>
+		<div class="today text-mute text-right">{{today | date:'shortDate'}}</div>
 	</header>
 
 	<section 
@@ -31,8 +31,8 @@
 
 		<button class="btn btn-default" ng-click="$emit('sort')">Sort</button>
 		<button class="btn btn-default" ng-click="$emit('printable')">Printable</button>
-	<footer>
-		a Katabelisk production, Retrospective v{{version | number: 1}}
+	<footer class="text-right">
+		<small class="text-mute">a Katabelisk production, Retrospective v{{version | number: 1}}</small>
 	</footer>
 
 	<script src="vendor/angular/angular.js"></script>
@@ -46,34 +46,39 @@
 
 	<script src="js/forceNumericDir.js"></script>
 	<script src="js/escInInputDir.js"></script>
+	<script src="js/focusInputDir.js"></script>
 
 
-<script type="text/ng-template" id="topics.html">
-	<form ng-submit="add(model.newTopic)">
-	<input type="text" ng-model="model.newTopic" placeholder="{{model.placeholder}}">
-	</form>
-	<ul class="list-unstyled list-topics" ng-include="'topic.html'"></ul>
-</script>
-
-
-<script type="text/ng-template" id="topic.html">
-	<li ng-repeat="topic in model.topics track by $index">
-
-		<div ng-class="{'hidden': topic == editedTopic }">
-			<div ng-if="model.isVotingEnabled">
-				<input type="text" ng-model="topic.votes" force-numeric>
-				<button class="btn btn-default" ng-click="increment(topic)">&plus;</button>
-			</div>
-			<div>
-				<button class="close pull-right" ng-click="remove($index)">&times;</button>
-				<div class="topic-name" ng-dblclick="editTopic(topic)">{{topic.name}}</div>
-			</div>
-		</div>
-		<form ng-submit="doneEditing(topic)">
-			<input type="text" ng-class="{'hidden': topic != editedTopic}" ng-model="editedTopic.name" esc-in-input="revertEditing(topic)">
+	<script type="text/ng-template" id="topics.html">
+		<form ng-submit="add(model.newTopic)">
+		<input type="text" ng-model="model.newTopic" placeholder="{{model.placeholder}}">
 		</form>
-	</li>
-</script>
+		<ul class="list-unstyled list-topics" ng-include="'topic.html'"></ul>
+	</script>
 
+
+	<script type="text/ng-template" id="topic.html">
+		<li ng-repeat="topic in model.topics track by $index">
+
+			<div ng-class="{'hidden': topic == editedTopic }">
+				<div ng-if="model.isVotingEnabled">
+					<input type="text" ng-model="topic.votes" force-numeric>
+					<button class="btn btn-default" ng-click="increment(topic)">&plus;</button>
+				</div>
+				<div>
+					<button class="close pull-right" ng-click="remove(topic)">&times;</button>
+					<div class="topic-name" ng-dblclick="editTopic(topic)">{{topic.name}}</div>
+				</div>
+			</div>
+			<form ng-submit="doneEditing(topic)">
+				<input type="text"
+					focus-input="topic == editedTopic"
+					ng-class="{'hidden': topic != editedTopic, 'editing': topic==editedTopic}"
+					ng-model="editedTopic.name"
+					ng-blur="doneEditing(topic)"
+					esc-in-input="revertEditing(topic)">
+			</form>
+		</li>
+	</script>
 </body>
 </html>

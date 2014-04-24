@@ -1,4 +1,4 @@
-angular.module('retrospective.topics', ['retrospective.store'])
+angular.module('retrospective')
 .controller('TopicCtrl', ['$scope', '$attrs', 'topicStorage', 'topicKeys', function ($scope, $attrs, topicStorage, topicKeys) {
 	var topicID = $attrs.id;
 

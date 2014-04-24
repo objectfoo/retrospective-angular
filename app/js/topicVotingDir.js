@@ -1,4 +1,4 @@
-angular.module('retrospective.topics')
+angular.module('retrospective')
 .directive('retVoting', [function () {
 
 	return {

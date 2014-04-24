@@ -1,4 +1,4 @@
-angular.module('forceNumeric', [])
+angular.module('retrospective')
 .directive('forceNumeric', [function(){
 
 	return {
