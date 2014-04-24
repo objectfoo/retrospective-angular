@@ -53,14 +53,13 @@
 		<form ng-submit="add(model.newTopic)">
 		<input type="text" ng-model="model.newTopic" placeholder="{{model.placeholder}}">
 		</form>
-		<ul class="list-topics" ng-include="'topic.html'"></ul>
+		<ul class="list-unstyled list-topics" ng-include="'topic.html'"></ul>
 	</script>
 
 
 	<script type="text/ng-template" id="topic.html">
 		<li class="topic" ng-repeat="topic in model.topics track by $index">
-
-			<div class="media" ng-class="{'hidden': topic == editedTopic }">
+			<div class="media-clearfix" ng-class="{'hidden': topic == editedTopic }">
 				<div class="pull-left topic-panel" ng-if="model.isVotingEnabled">
 					<input type="text" ng-model="topic.votes" force-numeric>
 					<button class="btn btn-default btn-increment" ng-click="increment(topic)">&plus;</button>

@@ -2,6 +2,27 @@
   display: none !important;
 }
 
+#ret-bad ul {
+	counter-reset: alphas;
+	position: relative;
+
+	li {
+		padding-left: 40px;
+	}
+
+	li:before {
+		content: counter(alphas, upper-alpha);
+		counter-increment: alphas;
+		position: absolute;
+		left: 17px;
+		top: 10px;
+		font-size: 21px;
+		color: #8f807b;
+	}
+}
+
+
+
 .topic-panel {
 	position: relative;
 }
@@ -53,24 +74,20 @@
 
 .topic {
 	&:hover {
-		[ng-model='topic.votes'] {
-			visibility: hidden;
-		}
-
 		[ng-click*='increment'] {
 			display: block;
 		}
+
+		&:before {
+			display: none !important;
+		}
 	}
-
-
-
-
 }
 
 [ng-click*='increment'] {
 	position: absolute;
 	top: 5px;
-	left: 5px;
+	left: -35px;
 	display: none;
 }
 
@@ -88,7 +105,7 @@
 	color: #555;
 	cursor: pointer;
 	overflow: hidden;
-	padding: 10px;
+	padding: 12px 10px 10px 10px;
 }
 .page-header {
 	margin: @vertGutter * 2 0 @vertGutter /2 ;
@@ -118,7 +135,10 @@ body > footer {
  ********************************************************/
 .media,
 .media__body {
-	overflow: hidden;
+	overflow: auto;
+}
+.media-clearfix {
+	.clearfix();
 }
 
 .media {
@@ -133,13 +153,9 @@ body > footer {
 }
 
 .list-topics {
-	padding-left: 0;
-	list-style: lower-alpha;
-	margin: 0;
-
 	li {
+		position: relative;
 		.borderBox();
-		overflow: hidden;
 		border-top: 1px solid #ddd;
 	}
 }
@@ -171,8 +187,18 @@ body > footer {
 }
 
 .btn-increment {
+	color: #777;
+	font-family: monospace;
+	padding: 0;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 1;
 	width: 35px;
 	height: 35px;
+
+	&:hover {
+		color: #444;
+	}
 }
 
 .close {
@@ -182,8 +208,7 @@ body > footer {
 	-webkit-appearance: none;
 	font-size: 21px;
 	font-weight: 700;
-	color: #000;
-	opacity: .2;
+	color: #999;
 	text-shadow: 0 1px 0 #fff;
 	width: 38px;
 	height: 34px;
@@ -191,7 +216,7 @@ body > footer {
 	outline: none;
 
 	&:hover {
-		opacity: .5;
+		color: #555;
 	}
 }
 
@@ -203,6 +228,17 @@ body > footer {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+}
+
+.clearfix() {
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
 }
 
 @vertGutter: 20px;
