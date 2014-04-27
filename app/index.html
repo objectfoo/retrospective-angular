@@ -7,6 +7,9 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body ng-controller="MainCtrl">
+
+
+
 	<header class="page-header media">
 		<div class="pull-right"><button class="btn btn-default" ng-click="$broadcast('topics.clear')">Clear All</button></div>
 		<h1 class="brand">Retrospective <small>angular</small></h1>
@@ -14,23 +17,26 @@
 	</header>
 
 	<section 
-		id="ret-good"
 		ng-controller="TopicCtrl"
-		ret-topic-entry="What went well?"></section>
+		ng-include="'topics.html'"
+		top-id="ret-good"
+		top-placeholder="What went well?"></section>
 
 	<section
-		id="ret-bad"
 		ng-controller="TopicCtrl"
-		ret-voting
-		ret-topic-entry="What needs improvement?"></section>
+		top-voting
+		ng-include="'topics.html'"
+		top-id="ret-bad"
+		top-placeholder="What needs improvement?"></section>
 
 	<section
-		id="ret-next"
 		ng-controller="TopicCtrl"
-		ret-topic-entry="What should we try next time?"></section>
+		ng-include="'topics.html'"
+		top-id="ret-next"
+		top-placeholder="What should we try next time?"></section>
 
 		<button class="btn btn-default" ng-click="$emit('sort')">Sort</button>
-		<button class="btn btn-default" ng-click="$emit('printable')">Printable</button>
+		<button class="btn btn-default" ng-click="$emit('print')">Printable</button>
 	<footer class="text-right">
 		<small class="text-mute">a Katabelisk production, Retrospective v{{version | number: 1}}</small>
 	</footer>
@@ -38,16 +44,14 @@
 	<script src="vendor/angular/angular.js"></script>
 	
 	<script src="js/app.js"></script>
-	<script src="js/retrospectiveStore.js"></script>
+	<script src="js/topicStorage.js"></script>
 
 	<script src="js/TopicCtrl.js"></script>
-	<script src="js/topicEntryDir.js"></script>
-	<script src="js/topicVotingDir.js"></script>
+	<script src="js/topVotingDir.js"></script>
 
 	<script src="js/forceNumericDir.js"></script>
 	<script src="js/escInInputDir.js"></script>
 	<script src="js/focusInputDir.js"></script>
-
 
 	<script type="text/ng-template" id="topics.html">
 		<form ng-submit="add(model.newTopic)">
@@ -56,10 +60,9 @@
 		<ul class="list-unstyled list-topics" ng-include="'topic.html'"></ul>
 	</script>
 
-
 	<script type="text/ng-template" id="topic.html">
 		<li class="topic" ng-repeat="topic in model.topics track by $index">
-			<div class="media-clearfix" ng-class="{'hidden': topic == editedTopic }">
+			<div class="media-clearfix" ng-class="{'hidden': topic == model.editedTopic }">
 				<div class="pull-left topic-panel" ng-if="model.isVotingEnabled">
 					<input type="text" ng-model="topic.votes" force-numeric>
 					<button class="btn btn-default btn-increment" ng-click="increment(topic)">&plus;</button>
@@ -71,13 +74,28 @@
 			</div>
 			<form ng-submit="doneEditing(topic)">
 				<input type="text"
-					focus-input="topic == editedTopic"
-					ng-class="{'hidden': topic != editedTopic, 'editing': topic==editedTopic}"
-					ng-model="editedTopic.name"
+					focus-input="topic == model.editedTopic"
+					ng-class="{'hidden': topic != model.editedTopic, 'editing': topic==model.editedTopic}"
+					ng-model="model.editedTopic.name"
 					ng-blur="doneEditing(topic)"
 					esc-in-input="revertEditing(topic)">
 			</form>
 		</li>
 	</script>
+
+<script type="text/ng-template" id="print.html">
+{{today | date: 'shortDate'}}<br><br>
+</script>
+
+<script type="text/ng-template" id="print-topic.html">
+<strong>{{title}}</strong>
+<div ng-repeat="topic in topics">- {{title}}</div>
+</script>
+
+<script type="text/ng-template" id="print-vote-topic.html">
+<strong>{{title}}</strong>
+<div ng-repeat="topic in topics">- {{votes}} {{title}}</div>
+</script>
+
 </body>
 </html>

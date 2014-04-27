@@ -5,7 +5,7 @@ angular.module('retrospective')
 		require: 'ngModel',
 		restrict: 'A',
 
-		link: function($scope, element, attrs, ngModelCtrl) {
+		link: ['$scope', '$element', '$attrs', 'ngModelCtrl', function($scope, element, attrs, ngModelCtrl) {
 			ngModelCtrl.$parsers.push(voteParser);
 
 			function voteParser(text) {
@@ -18,6 +18,6 @@ angular.module('retrospective')
 
 				return transformed;
 			}
-		}
+		}]
 	};
 }]);

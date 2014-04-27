@@ -1,5 +1,5 @@
 angular.module('retrospective')
-.directive('retVoting', [function () {
+.directive('topVoting', [function () {
 
 	return {
 		priority: 100,
