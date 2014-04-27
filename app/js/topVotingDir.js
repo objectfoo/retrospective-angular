@@ -7,7 +7,7 @@ angular.module('retrospective')
 		require: '^TopicsCtrl',
 		scope: '=',
 
-		controller: function($scope, $rootScope) {
+		controller: ['$scope', '$rootScope', function($scope, $rootScope) {
 			$scope.model.isVotingEnabled = true;
 
 			$rootScope.$on('sort', function () {
@@ -29,6 +29,6 @@ angular.module('retrospective')
 			$scope.increment = function (topic) {
 				topic.votes++;
 			};
-		}
+		}]
 	};
 }]);
