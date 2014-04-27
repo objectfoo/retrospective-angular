@@ -81,18 +81,16 @@
 		</li>
 	</script>
 
-<script type="text/ng-template" id="print.html">
-{{today | date: 'shortDate'}}<br><br>
+<script type="text/ng-template" id="print-header.html">
+Retrospective {{today | date: 'shortDate'}}<br><br>
+</script>
+
+<script type="text/ng-template" id="print-placeholder.html">
+<br><strong>{{placeholder}}</strong><br>
 </script>
 
 <script type="text/ng-template" id="print-topic.html">
-<strong>{{title}}</strong>
-<div ng-repeat="topic in topics">- {{title}}</div>
-</script>
-
-<script type="text/ng-template" id="print-vote-topic.html">
-<strong>{{title}}</strong>
-<div ng-repeat="topic in topics">- {{votes}} {{title}}</div>
+- {{votes}} {{name}}<br>
 </script>
 
 </body>

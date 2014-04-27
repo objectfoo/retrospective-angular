@@ -1,11 +1,14 @@
 angular.module('retrospective')
-.controller('TopicCtrl', ['$scope', '$attrs', 'topicStorage', 'topicKeys', function ($scope, $attrs, topicStorage, topicKeys) {
+.controller('TopicCtrl', ['$scope', '$attrs', 'topicStorage', 'topicMeta', function ($scope, $attrs, topicStorage, topicMeta) {
 	'use strict';
 
 	var originalTopic, topics, model,
 		topicID = $attrs.topId;
 
-	topicKeys.push(topicID);
+	topicMeta.push({
+		id: topicID,
+		placeholder: $attrs.topPlaceholder
+	});
 
 	angular.extend($scope, {
 		model: {
