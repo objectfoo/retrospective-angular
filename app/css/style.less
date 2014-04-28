@@ -52,8 +52,8 @@
 	background-color: #fff;
 }
 
-[ng-model='model.editedTopic.name'],
-[ng-model='model.newTopic'] {
+[ng-model='topic.name'],
+[ng-model='newTopic'] {
 	.borderBox();
 	border-width: 0 ;
 	color: #555;
@@ -96,7 +96,11 @@
 	margin: 5px;
 	text-align: center;
 	height: 35px;
+	outline: 0;
 
+	&:focus {
+		background-color: #F5F6CE;
+	}
 }
 
 .topic-name {
