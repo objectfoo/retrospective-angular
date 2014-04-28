@@ -1,76 +1,58 @@
-angular.module('retrospective')
-.controller('TopicCtrl', ['$scope', '$attrs', 'topicStorage', 'topicMeta', function ($scope, $attrs, topicStorage, topicMeta) {
+(function (angular, retrospective) {
 	'use strict';
 
-	var originalTopic, topics, model,
-		topicID = $attrs.topId;
+	retrospective.controller('TopicCtrl', 
+		[ '$scope', '$attrs', 'TopicsModel', '$rootScope', 'printService', TopicCtrl]);
 
-	topicMeta.push({
-		id: topicID,
-		placeholder: $attrs.topPlaceholder
-	});
+	function TopicCtrl($scope, $attrs, TopicsModel, $rootScope, printService) {
+		var originalTopic,
+			topics = new TopicsModel($attrs.topId, $attrs.topPlaceholder);
 
-	angular.extend($scope, {
-		model: {
-			placeholder: $attrs.topPlaceholder,
-			editedTopic: null,
-			newTopic: null,
-			topics: topicStorage.get(topicID)
-		},
+		$rootScope.$on('print', printToWindow);
+		$scope.$on('topics.clear', function () {
+			topics.clear();
+		});
 
-		add: add,
-		remove: remove,
-		editTopic: editTopic,
-		doneEditing: doneEditing,
-		revertEditing: revertEditing
-	});
+		angular.extend($scope, {
+			topics: topics,
+			
+			add: function (topic) {
+				topics.add({ name: topic });
+				this.newTopic = '';
+			},
 
-	// shortcuts
-	model = $scope.model;
-	topics = model.topics;
+			remove: function (topic) {
+				topics.remove(topic);
+			},
 
-	// events
-	$scope.$watch('model.topics', updateStore, true);
-	$scope.$on('topics.clear', clearTopics);
+			editTopic: function(topic) {
+				originalTopic = angular.extend({}, topic);
+				topic.editing = true;
+			},
 
-	// functions
-	function updateStore() {
-		topicStorage.put(topicID, topics);
-	}
+			doneEditing: function (topic) {
+				if (topic.editing && this.topic.name.length === 0) {
+					topics.remove(this.topic);
+				}
+				topics.endEditing(topic);
+			},
 
-	function clearTopics() {
-		topics.length = 0;
-	}
+			revertEditing: function (topic) {
+				topics.list[topics.list.indexOf(topic)] = originalTopic;
+				topic.editing = false;
+				originalTopic = null;
+			}
+		});
+	
+		function printToWindow() {
+			if (topics.list.length > 0) {
+				printService.write('print-placeholder.html', { placeholder: topics.placeholder });
 
-	function add(newName) {
-		if (newName && newName.length) {
-			topics.unshift({ name: newName });
-			model.newTopic = '';
-		}
-	}
-
-	function remove(topic) {
-		topics.splice(topics.indexOf(topic), 1);
-	}
-
-	function editTopic(topic) {
-		model.editedTopic = topic;
-		originalTopic = angular.extend({}, topic);
-	}
-
-	function doneEditing(topic) {
-		if (model.editedTopic !== null) {
-			model.editedTopic = null;
-
-			if (topic.name.length === 0) {
-				remove(topic);
+				topics.list.forEach(function (topic) {
+					printService.write('print-topic.html', { votes: topic.votes, name: topic.name });
+				});
 			}
 		}
 	}
 
-	function revertEditing(topic) {
-		topics[topics.indexOf(topic)] = originalTopic;
-		doneEditing(originalTopic);
-	}
-
-}]);
+})(angular, angular.module('retrospective'));
