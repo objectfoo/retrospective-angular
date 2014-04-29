@@ -63,7 +63,7 @@
 		<li class="topic" ng-repeat="topic in topics.list">
 			<div class="media-clearfix" ng-class="{'hidden': topic.editing }">
 				<div class="pull-left topic-panel" ng-if="isVotingEnabled">
-					<input type="text" ng-model="topic.votes" force-numeric>
+					<input type="text" ng-model="topic.votes" ng-blur="topics.save()" force-numeric>
 					<button class="btn btn-default btn-increment" ng-click="increment(topic)">&plus;</button>
 				</div>
 				<div class="media__body">

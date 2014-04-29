@@ -66,10 +66,8 @@
 (function (angular, retrospective) {
 	'use strict';
 
-	retrospective.controller('TopicCtrl', 
-		[ '$scope', '$attrs', 'TopicsModel', '$rootScope', 'printService', TopicCtrl]);
-
-	function TopicCtrl($scope, $attrs, TopicsModel, $rootScope, printService) {
+	retrospective.controller('TopicCtrl', [ '$scope', '$attrs', 'TopicsModel', '$rootScope', 'printService',
+	function ($scope, $attrs, TopicsModel, $rootScope, printService) {
 		var originalTopic,
 			topics = new TopicsModel($attrs.topId, $attrs.topPlaceholder);
 
@@ -118,7 +116,7 @@
 				});
 			}
 		}
-	}
+	}]);
 
 })(angular, angular.module('retrospective'));
 
@@ -171,8 +169,6 @@
 		};
 	}]);
 })(angular.module('retrospective'));
-
-
 (function (retrospective) {
 	'use strict';
 
@@ -231,4 +227,3 @@
 		};
 	}
 })(angular.module('retrospective'));
-

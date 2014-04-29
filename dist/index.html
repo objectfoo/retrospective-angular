@@ -38,39 +38,35 @@
 		<small class="text-mute">a Katabelisk production, Retrospective v{{version | number: 1}}</small>
 	</footer>
 
-	<script src="vendor/angular/angular.min.js"></script>
-	
-	<script src="js/bundle.js"></script>
+<script type="text/ng-template" id="topics.html">
+	<form ng-submit="add(newTopic)">
+		<input name="newTopicEl" type="text" ng-model="newTopic" placeholder="{{topics.placeholder}}">
+	</form>
+	<ul class="list-unstyled list-topics" ng-include="'topic.html'"></ul>
+</script>
 
-	<script type="text/ng-template" id="topics.html">
-		<form ng-submit="add(newTopic)">
-			<input name="newTopicEl" type="text" ng-model="newTopic" placeholder="{{topics.placeholder}}">
-		</form>
-		<ul class="list-unstyled list-topics" ng-include="'topic.html'"></ul>
-	</script>
-
-	<script type="text/ng-template" id="topic.html">
-		<li class="topic" ng-repeat="topic in topics.list">
-			<div class="media-clearfix" ng-class="{'hidden': topic.editing }">
-				<div class="pull-left topic-panel" ng-if="isVotingEnabled">
-					<input type="text" ng-model="topic.votes" force-numeric>
-					<button class="btn btn-default btn-increment" ng-click="increment(topic)">&plus;</button>
-				</div>
-				<div class="media__body">
-					<button tabindex="-1" class="close pull-right" ng-click="remove(topic)">&times;</button>
-					<div class="topic-name" ng-dblclick="editTopic(topic)">{{topic.name}}</div>
-				</div>
+<script type="text/ng-template" id="topic.html">
+	<li class="topic" ng-repeat="topic in topics.list">
+		<div class="media-clearfix" ng-class="{'hidden': topic.editing }">
+			<div class="pull-left topic-panel" ng-if="isVotingEnabled">
+				<input type="text" ng-model="topic.votes" ng-blur="topics.save()" force-numeric>
+				<button class="btn btn-default btn-increment" ng-click="increment(topic)">&plus;</button>
 			</div>
-			<form ng-submit="doneEditing(topic)">
-				<input type="text"
-					focus-input="topic.editing"
-					ng-class="{ hidden: !topic.editing, editing: topic.editing }"
-					ng-model="topic.name"
-					ng-blur="doneEditing(topic)"
-					esc-in-input="revertEditing(topic)">
-			</form>
-		</li>
-	</script>
+			<div class="media__body">
+				<button tabindex="-1" class="close pull-right" ng-click="remove(topic)">&times;</button>
+				<div class="topic-name" ng-dblclick="editTopic(topic)">{{topic.name}}</div>
+			</div>
+		</div>
+		<form ng-submit="doneEditing(topic)">
+			<input type="text"
+				focus-input="topic.editing"
+				ng-class="{ hidden: !topic.editing, editing: topic.editing }"
+				ng-model="topic.name"
+				ng-blur="doneEditing(topic)"
+				esc-in-input="revertEditing(topic)">
+		</form>
+	</li>
+</script>
 
 <script type="text/ng-template" id="print-header.html">
 Retrospective {{today | date: 'shortDate'}}<br><br>
@@ -84,5 +80,7 @@ Retrospective {{today | date: 'shortDate'}}<br><br>
 - {{votes}} {{name}}<br>
 </script>
 
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
