@@ -4,28 +4,38 @@
 
 	var injector, TopicsModel, $window, topicsModel;
 
+	/**
+	 * givens
+	 *************************************************************************/
 	given.testModel = function(id, ph) {
 		topicsModel = new TopicsModel(id || 'test-id', ph || 'test-placeholder');
 	};
 
-	module('TopicsModel', {
-		setup: function () {
-			injector = angular.injector(['ng', 'retrospective']);
-			TopicsModel = injector.get('TopicsModel');
-			$window = injector.get('$window');
+	/**
+	 * setup / teardown
+	 *************************************************************************/
+	 function setup() {
+		injector = angular.injector(['ng', 'retrospective']);
+		TopicsModel = injector.get('TopicsModel');
+		$window = injector.get('$window');
 
-			this.getItemStub = sinon.stub($window.localStorage, 'getItem');
-			this.setItemStub = sinon.stub($window.localStorage, 'setItem');
+		this.getItemStub = sinon.stub($window.localStorage, 'getItem');
+		this.setItemStub = sinon.stub($window.localStorage, 'setItem');
 
-			localStorage.clear();
-		},
-		teardown: function () {
-			injector = TopicsModel = null;
-			this.getItemStub.restore();
-			this.setItemStub.restore();
-			topicsModel = null;
-		}
-	});
+		localStorage.clear();
+	 }
+
+	 function teardown() {
+		injector = TopicsModel = null;
+		this.getItemStub.restore();
+		this.setItemStub.restore();
+		topicsModel = null;
+	 }
+
+	/**
+	 * module
+	 *************************************************************************/
+	module('TopicsModel', { setup: setup, teardown: teardown });
 
 	test('Constructor', function () {
 		given.testModel();
