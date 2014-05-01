@@ -23,9 +23,12 @@
 		};
 
 		Topics.prototype.remove = function (topic) {
-			var list = this.list;
-			list.splice(list.indexOf(topic), 1);
-			this.save();
+			var list = this.list,
+				idx = list.indexOf(topic);
+			if (idx > 0) {
+				list.splice(list.indexOf(topic), 1);
+				this.save();
+			}
 		};
 
 		Topics.prototype.clear = function () {

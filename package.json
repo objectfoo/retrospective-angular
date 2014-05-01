@@ -19,6 +19,8 @@
   "homepage": "https://github.com/objectfoo/retrospective-angular",
   "devDependencies": {
     "express": "^4.0.0",
-    "compression": "^1.0.1" 
+    "compression": "^1.0.1",
+    "sinon": "^1.9.1",
+    "qunit": "^0.6.2"
   }
 }
