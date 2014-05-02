@@ -29,9 +29,10 @@
 			},
 
 			doneEditing: function (topic) {
-				if (topic.editing && this.topic.name.length === 0) {
-					topics.remove(this.topic);
+				if (topic.editing && topic.name.length === 0) {
+					topics.remove(topic);
 				}
+
 				topics.endEditing(topic);
 			},
 
