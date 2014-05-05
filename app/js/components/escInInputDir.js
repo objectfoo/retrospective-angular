@@ -1,7 +1,7 @@
-(function (retrospective) {
+(function (retro) {
 	'use strict';
 
-	retrospective.directive('escInInput', [function(){
+	retro.directive('escInInput', [function(){
 		var ESC_KEY = 27;
 
 		return function (scope, elem, attrs) {
@@ -12,4 +12,4 @@
 			});
 		};
 	}]);
-})(angular.module('retrospective'));
+})(angular.module('EscInInput', []));

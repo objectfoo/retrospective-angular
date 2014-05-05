@@ -13,7 +13,7 @@
 	 * Setup / tear down
 	 *************************************************************************/
 	function setup() {
-		injector = angular.injector(['ng', 'retrospective']);
+		injector = angular.injector(['ng', 'retro.Topics']);
 		$scope = injector.get('$rootScope').$new();
 
 		ctrl = injector.get('$controller')('TopicCtrl', {
@@ -97,13 +97,5 @@
 		equal(testTopic.editing, false, 'editing is false');
 		equal($scope.topics.list[0].name, testName, 'topic name set back to original name');
 	});
-
-
-
-
-
-
-
-
 
 })(window.given || {});

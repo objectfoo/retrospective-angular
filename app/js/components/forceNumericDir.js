@@ -1,7 +1,7 @@
-(function (retrospective) {
+(function (module) {
 	'use strict';
 
-	retrospective.directive('forceNumeric', [function(){
+	module.directive('forceNumeric', [function(){
 		return {
 			require: 'ngModel',
 			restrict: 'A',
@@ -22,5 +22,5 @@
 			}]
 		};
 	}]);
-})(angular.module('retrospective'));
+})(angular.module('ForceNumeric', []));
 

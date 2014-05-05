@@ -1,7 +1,7 @@
-(function (retrospective) {
+(function (print) {
 	'use strict';
 
-	retrospective.service('printService',
+	print.service('printService',
 		['$templateCache', '$interpolate', printService]);
 
 	function printService($templateCache, $interpolate) {
@@ -13,4 +13,4 @@
 			}
 		};
 	}
-})(angular.module('retrospective'));
+})(angular.module('retro.Print', []));

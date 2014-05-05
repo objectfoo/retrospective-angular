@@ -1,7 +1,7 @@
-(function (retrospective) {
+(function (retro) {
 	'use strict';
 
-	retrospective.directive('focusInput', ['$timeout', function todoFocus($timeout) {
+	retro.directive('focusInput', ['$timeout', function todoFocus($timeout) {
 		return function (scope, elem, attrs) {
 			scope.$watch(attrs.focusInput, function (newVal) {
 				if (newVal) {
@@ -12,5 +12,5 @@
 			});
 		};
 	}]);	
-})(angular.module('retrospective'));
+})(angular.module('FocusInput', []));
 

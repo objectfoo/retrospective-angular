@@ -1,7 +1,7 @@
-(function (retrospective) {
+(function (retro) {
 	'use strict';
 
-	retrospective
+	retro
 	.value('topicMeta', [])
 	.value('version', 5.2)
 	.controller('MainCtrl',
@@ -15,5 +15,4 @@
 			printService.write('print-header.html', { today: $scope.today });
 		});
 	}
-})(angular.module('retrospective', []));
-
+})(angular.module('retro', ['retro.Topics', 'retro.Print', 'ForceNumeric', 'FocusInput', 'EscInInput']));

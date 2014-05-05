@@ -15,7 +15,7 @@
 	 * setup / teardown
 	 *************************************************************************/
 	 function setup() {
-		injector = angular.injector(['ng', 'retrospective']);
+		injector = angular.injector(['ng', 'retro']);
 		TopicsModel = injector.get('TopicsModel');
 		$window = injector.get('$window');
 
