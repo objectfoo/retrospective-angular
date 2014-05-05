@@ -95,6 +95,9 @@
 		topicsModel.remove(MockTopic2);
 		deepEqual(topicsModel.list, [MockTopic1, MockTopic3], 'Only removes object if object exists in list');
 		ok(this.setItemStub.calledOnce, 'Saves to localStorage one time');
+
+		topicsModel.remove(MockTopic1);
+		deepEqual(topicsModel.list, [MockTopic3], 'Removed zeroth element from list (bugfix)')
 	});
 
 
@@ -119,4 +122,5 @@
 
 		equal(topicsModel.editing, false, 'sets editing to false');
 	});
+
 })({});
