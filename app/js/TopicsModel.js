@@ -25,7 +25,9 @@
 		Topics.prototype.remove = function (topic) {
 			var list = this.list,
 				idx = list.indexOf(topic);
-			if (idx > 0) {
+
+			if (idx >= 0) {
+				console.log(idx);
 				list.splice(list.indexOf(topic), 1);
 				this.save();
 			}
