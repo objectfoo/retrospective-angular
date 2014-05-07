@@ -1,8 +1,5 @@
-(function (print) {
+(function (angular) {
 	'use strict';
-
-	print.service('printService',
-		['$templateCache', '$interpolate', printService]);
 
 	function printService($templateCache, $interpolate) {
 		return {
@@ -13,4 +10,8 @@
 			}
 		};
 	}
-})(angular.module('retro.Print', []));
+
+	printService.$inject = ['$templateCache', '$interpolate'];
+	angular.module('retro.Print', []).service('printService', printService);
+
+})(angular);

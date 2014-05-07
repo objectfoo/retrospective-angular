@@ -40,17 +40,6 @@
 		<small class="text-mute">a Katabelisk production, Retrospective v{{version | number: 1}}</small>
 	</footer>
 
-	<script src="vendor/angular/angular.js"></script>
-	
-	<script src="js/app.js"></script>
-	<script src="js/components/printService.js"></script>
-
-	<script src="js/Topics.js"></script>
-
-	<script src="js/components/forceNumericDir.js"></script>
-	<script src="js/components/escInInputDir.js"></script>
-	<script src="js/components/focusInputDir.js"></script>
-
 	<script type="text/ng-template" id="topics.html">
 		<form ng-submit="add(newTopic)">
 			<input name="newTopicEl" type="text" ng-model="newTopic" placeholder="{{topics.placeholder}}">
@@ -93,5 +82,17 @@ Retrospective {{today | date: 'shortDate'}}<br><br>
 - {{votes}} {{name}}<br>
 </script>
 
+<script src="vendor/angular/angular.js"></script>
+
+<script src="js/app.js"></script>
+
+<script src="js/Topics/TopicsCtrl.js"></script>
+<script src="js/Topics/TopicsModel.js"></script>
+<script src="js/Topics/topVotingDir.js"></script>
+
+<script src="js/components/printService.js"></script>
+<script src="js/components/forceNumericDir.js"></script>
+<script src="js/components/escInInputDir.js"></script>
+<script src="js/components/focusInputDir.js"></script>
 </body>
 </html>

@@ -1,9 +1,11 @@
-(function (retro) {
+(function (angular) {
 	'use strict';
 
-	retro.directive('focusInput', ['$timeout', function todoFocus($timeout) {
+	function focusInput($timeout) {
+
 		return function (scope, elem, attrs) {
 			scope.$watch(attrs.focusInput, function (newVal) {
+
 				if (newVal) {
 					$timeout(function () {
 						elem[0].focus();
@@ -11,6 +13,9 @@
 				}
 			});
 		};
-	}]);	
-})(angular.module('FocusInput', []));
+	}
+
+	focusInput.$inject = ['$timeout'];
+	angular.module('FocusInput', []).directive('focusInput', focusInput);
+})(angular);
 
