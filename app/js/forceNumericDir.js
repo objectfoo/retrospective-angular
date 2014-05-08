@@ -1,5 +1,4 @@
-angular
-	.module('ForceNumeric', [])
+window.retro
 	.directive('forceNumeric', function () {
 		'use strict';
 

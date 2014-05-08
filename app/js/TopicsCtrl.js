@@ -1,5 +1,4 @@
-angular
-	.module('retro.Topics', [])
+window.retro
 	.controller('TopicCtrl',
 	['$scope', '$attrs', 'TopicsModel', '$rootScope', 'printService',
 	function ($scope, $attrs, TopicsModel, $rootScope, printService) {

@@ -1,5 +1,4 @@
-angular
-	.module('retro.Topics')
+window.retro
 	.directive('topVoting', function () {
 		'use strict';
 

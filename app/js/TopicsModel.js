@@ -1,5 +1,4 @@
-angular
-	.module('retro.Topics')
+window.retro
 	.factory('TopicsModel', ['$window', function ($window) {
 		'use strict';
 

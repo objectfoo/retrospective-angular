@@ -1,5 +1,4 @@
-angular
-	.module('FocusInput', [])
+window.retro
 	.directive('focusInput', ['$timeout', function ($timeout) {
 
 		return function (scope, elem, attrs) {
