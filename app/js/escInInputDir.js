@@ -1,5 +1,4 @@
-angular
-	.module('EscInInput', [])
+window.retro
 	.directive('escInInput', function () {
 		'use strict';
 

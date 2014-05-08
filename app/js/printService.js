@@ -1,5 +1,4 @@
-angular
-	.module('retro.Print', [])
+window.retro
 	.service('printService', ['$templateCache', '$interpolate',
 	function ($templateCache, $interpolate) {
 		'use strict';
