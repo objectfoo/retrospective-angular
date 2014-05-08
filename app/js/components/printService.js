@@ -1,17 +1,15 @@
-(function (angular) {
-	'use strict';
+angular
+	.module('retro.Print', [])
+	.service('printService', ['$templateCache', '$interpolate',
+	function ($templateCache, $interpolate) {
+		'use strict';
 
-	function printService($templateCache, $interpolate) {
 		return {
 			write: function (template, data) {
+				/*jshint evil:true*/
 				var tmpl = $templateCache.get(template);
 
 				document.write($interpolate(tmpl)(data));
 			}
 		};
-	}
-
-	printService.$inject = ['$templateCache', '$interpolate'];
-	angular.module('retro.Print', []).service('printService', printService);
-
-})(angular);
+	}]);

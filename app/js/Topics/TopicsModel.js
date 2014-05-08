@@ -1,11 +1,7 @@
-(function (angular) {
-	'use strict';
-
-	/**
-	 * TopicsModel
-	 *************************************************************************/
-	function TopicsModel($window) {
-		var p = 'prototype';
+angular
+	.module('retro.Topics')
+	.factory('TopicsModel', ['$window', function ($window) {
+		'use strict';
 
 		function Topics(id, placeholder) {
 			this.id = id;
@@ -50,9 +46,5 @@
 		};
 
 		return Topics;
-	}
 
-
-	TopicsModel.$inject = ['$window'];
-	angular.module('retro.Topics').factory('TopicsModel', TopicsModel);
-})(angular);
+	}]);

@@ -1,53 +1,41 @@
-(function (angular) {
-	'use strict';
+angular
+	.module('retro.Topics', [])
+	.controller('TopicCtrl',
+	['$scope', '$attrs', 'TopicsModel', '$rootScope', 'printService',
+	function ($scope, $attrs, TopicsModel, $rootScope, printService) {
+		'use strict';
 
-	/**
-	 * TopicCtrl
-	 *************************************************************************/
-	 function TopicCtrl($scope, $attrs, TopicsModel, $rootScope, printService) {
 		var originalTopic, topics;
 
 		$rootScope.$on('print', printToWindow);
+		$scope.$on('topics.clear', function () { topics.clear(); });
 
-		$scope.$on('topics.clear', function () {
-			topics.clear();
-		});
+		$scope.topics = topics =
+			new TopicsModel($attrs.topId, $attrs.topPlaceholder);
 
-		topics = new TopicsModel($attrs.topId, $attrs.topPlaceholder);
+		$scope.add = function (topic) {
+			topics.add({ name: topic });
+			this.newTopic = '';
+		};
 
+		$scope.editTopic = function (topic) {
+			originalTopic = angular.extend({}, topic);
+			topic.editing = true;
+		};
 
-		angular.extend($scope, {
-			topics: topics,
-			
-			add: function (topic) {
-				topics.add({ name: topic });
-				this.newTopic = '';
-			},
-
-			remove: function (topic) {
+		$scope.doneEditing = function (topic) {
+			if (topic.editing && topic.name.length === 0) {
 				topics.remove(topic);
-			},
-
-			editTopic: function(topic) {
-				originalTopic = angular.extend({}, topic);
-				topic.editing = true;
-			},
-
-			doneEditing: function (topic) {
-				if (topic.editing && topic.name.length === 0) {
-					topics.remove(topic);
-				}
-
-				topics.endEditing(topic);
-			},
-
-			revertEditing: function (topic) {
-				topics.list[topics.list.indexOf(topic)] = originalTopic;
-				topic.editing = false;
-				originalTopic = null;
 			}
-		});
-	
+			topics.endEditing(topic);
+		};
+
+		$scope.revertEditing = function (topic) {
+			topics.list[topics.list.indexOf(topic)] = originalTopic;
+			topic.editing = false;
+			originalTopic = null;
+		};
+
 		function printToWindow() {
 			if (topics.list.length > 0) {
 				printService.write('print-placeholder.html', { placeholder: topics.placeholder });
@@ -57,9 +45,4 @@
 				});
 			}
 		}
-	 }
-
-	TopicCtrl.$inject = [ '$scope', '$attrs', 'TopicsModel', '$rootScope', 'printService'];
-	angular.module('retro.Topics', []).controller('TopicCtrl', TopicCtrl);
-
-})(angular);
+	}]);

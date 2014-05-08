@@ -1,30 +1,24 @@
-(function (module) {
-	'use strict';
+angular
+	.module('ForceNumeric', [])
+	.directive('forceNumeric', function () {
+		'use strict';
 
-	function forceNumeric(){
 		return {
 			require: 'ngModel',
 			restrict: 'A',
-			link: linkFn
-		};
-	}
+			link: function (scope, element, attrs, ngModelCtrl) {
+				ngModelCtrl.$parsers.push(voteParser);
 
-	function linkFn($scope, element, attrs, ngModelCtrl) {
-		ngModelCtrl.$parsers.push(voteParser);
+				function voteParser(text) {
+					var transformed = text.replace(/[^0-9]/g, '');
 
-		function voteParser(text) {
-			var transformed = text.replace(/[^0-9]/g, '');
+					if (transformed !== text) {
+						ngModelCtrl.$setViewValue(transformed);
+						ngModelCtrl.$render();
+					}
 
-			if (transformed !== text) {
-				ngModelCtrl.$setViewValue(transformed);
-				ngModelCtrl.$render();						
+					return transformed;
+				}
 			}
-
-			return transformed;
-		}
-	}
-	linkFn.$inject = ['$scope', '$element', '$attrs', 'ngModelCtrl'];
-
-	module.directive('forceNumeric', forceNumeric);
-
-})(angular.module('ForceNumeric', []));
+		};
+	});

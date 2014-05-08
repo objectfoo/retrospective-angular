@@ -1,7 +1,8 @@
-(function (angular) {
-	'use strict';
+angular
+	.module('retro.Topics')
+	.directive('topVoting', function () {
+		'use strict';
 
-	angular.module('retro.Topics').directive('topVoting', function () {
 		return {
 			priority: 100,
 			restrict: 'A',
@@ -30,5 +31,3 @@
 			}]
 		};
 	});
-
-})(angular);

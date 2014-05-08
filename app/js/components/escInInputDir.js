@@ -1,7 +1,8 @@
-(function (angular) {
-	'use strict';
+angular
+	.module('EscInInput', [])
+	.directive('escInInput', function () {
+		'use strict';
 
-	function escInInput() {
 		var ESC_KEY = 27;
 
 		return function (scope, elem, attrs) {
@@ -11,8 +12,4 @@
 				}
 			});
 		};
-	}
-
-	angular.module('EscInInput', []).directive('escInInput', escInInput);
-
-})(angular);
+	});
