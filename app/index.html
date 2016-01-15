@@ -41,7 +41,7 @@
 
 	<script type="text/ng-template" id="topics.html">
 		<form ng-submit="add(newTopic)">
-			<input name="newTopicEl" type="text" ng-model="newTopic" placeholder="{{topics.placeholder}}">
+			<input name="newTopicEl" type="text" ng-model="newTopic" placeholder="{{topics.placeholder}}" autocomplete="off">
 		</form>
 		<ul class="list-unstyled list-topics" ng-include="'topic.html'"></ul>
 	</script>
